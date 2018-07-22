@@ -53,6 +53,7 @@ asciidoctor {
 
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
         doLast {
+            println "Opening in browser"
             ["osascript", "-e", """
                 try
                     tell application "Finder" to get application file id "com.google.Chrome"
