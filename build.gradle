@@ -53,7 +53,7 @@ task download {
                     templateDir,
                     recursive: true,
                     overwrite: true
-            cp "zip:https://github.com/hakimel/reveal.js/archive/${revealjsVersion}.zip!reveal.js-${revealjsVersion}",
+            cp "zip:https://github.com/hakimel/reveal.js/archive/${revealjsVersion}.zip!reveal.js-${revealjsVersion}/",
                     revealJsDir,
                     recursive: true,
                     overwrite: true
@@ -64,9 +64,10 @@ task download {
 task copyTheme(type: Copy) {
     dependsOn download
     from fileTree("$revealJsDir/reveal.js-${revealjsVersion}")
+    from(fileTree('src/docs/theme')) {
+        into 'css/theme'
+    }
     into revealJsDir
-    from fileTree('src/docs/theme')
-    into file("$revealJsDir/css/theme")
 }
 
 task copyScreencasts(type: Copy) {
