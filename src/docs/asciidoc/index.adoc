@@ -1,4 +1,4 @@
-= Entwickler-Produktivität steigern mit Gradle
+= Moderne Build Tools - Gradle
 :title-slide-background-image: title.jpeg
 :title-slide-transition: zoom
 :title-slide-transition-speed: fast
@@ -25,11 +25,10 @@ https://twitter.com/wolfs42[Stefan Wolf (@wolfs42)], Gradle
 === Daten
 
 * ~30 Entwickler die Vollzeit an Gradle arbeiten
-* 3.0 - 15. August 2016
-* 3.5 - 10. April 2017
 * 4.0 - 14. Juni 2017
-* 4.2 - 20. September 2017
-* Releasezyklus 4 - 6 Wochen.
+* 4.8 - 4. Juni 2018
+* 4.9 - 16 Juli 2018
+* Releasezyklus 6 Wochen.
 * 3-5 Millionen Downloads pro Monat
 
 === Was ist Gradle Enterprise?
@@ -113,16 +112,22 @@ wenn *irgendein Build* +
 image::build_caching.svg[width=380px, height=auto]
 
 [%notitle]
-=== Build cache für Java-Projekte
+=== Build Cache für Java-Projekte
 image::build-cache.png[background,size=70%]
+
+[%notitle]
+=== Build Cache Ersparnis
+image::build-cache-savings.png[background,size=90%]
+
+[%notitle]
+=== Build Cache Statistiken
+image::build-cache-stats.png[background,size=70%]
 
 === Build Cache
 
-[%step]
 [source,text]
 ----
 $> gradle --build-cache assemble
-Build cache is an incubating feature.
 :compileJava FROM-CACHE
 :processResources
 :classes
@@ -132,27 +137,40 @@ Build cache is an incubating feature.
 BUILD SUCCESSFUL
 ----
 
+=== Was sind Build Scans?
+
+* Aufzeichnung was in einem Build passiert ist
+* Permanente und teilbare URLs
+* Für Entwickler und Build Master
+* https://gradle.com/build-scans
+
 === Build Cache - Demo
 
-https://enterprise-demo.gradle.com/s/4em4d65gvljsm/performance/buildCache[Build Scan]
-
-[NOTE.speaker]
---
-* Show cached build from CI (pull/push)
-* Show cache built-in node UI
-* Show cache controller UI
-* Look at cache controller UI
---
+https://e.grdev.net/s/o3jyzcewomwa4[Build Scan]
 
 [%notitle]
-=== Build Cache Stats
-image::build-cache-stats.png[background,size=70%]
+=== Build Cache - Demo
+image::build-scan-front-page.png[background,size=90%]
+
+[%notitle]
+=== Build Cache - Demo
+image::build-cache-overview.png[background,size=90%]
+
+[%notitle]
+=== Build Cache - Demo
+image::build-cache-performance.png[background,size=90%]
+
+[%notitle]
+=== Build Cache - Demo
+image::build-cache-loaded-from-cache.png[background,size=90%]
+
 
 === Build Cache
 
 * Stabil für Java, Groovy und Scala Projekte
 * Performantes Backend von Gradle
 * Dockerhub: https://hub.docker.com/r/gradle/build-cache-node/[gradle/build-cache-node]
+* Integriert mit Gradle Enterprise
 
 === Messe und optimiere
 
@@ -161,102 +179,85 @@ image::build-cache-stats.png[background,size=70%]
 ** Entwicklerbuilds?
 * Lösung: Build Scans
 
-=== Was sind Build Scans?
-
-* Aufzeichnung was in einem Build passiert ist
-* Permanente und teilbare URLs
-* Für Entwickler und Build Master
-
-=== Build Scans - Demo
-
-* https://enterprise-demo.gradle.com/s/4em4d65gvljsm[Build Scan]
-* https://enterprise-demo.gradle.com/scans[Scan Liste]
-* https://enterprise-demo.gradle.com/scans?tags=local[Entwickler Builds]
-
-[NOTE.speaker]
---
-* Navigate to summary, open performance tab, open timeline tab, open plugins view
-* Show scan list
-* Build categorization via Tags
---
-
-=== Export API
-
-video::202944447[vimeo,height=520]
+[%notitle]
+=== Build Scans - Scan Liste
+image::how-many-builds-last-week.png[background,size=90%]
 
 [%notitle]
-=== Tableau - Failures by task type
+=== Build Scans - Scan Liste
+image::scan-list.png[background,size=90%]
 
-image::export-api-tableau-failures-by-task-type.png[background,size=50%]
+[%notitle]
+=== Build Scans - Demo
+image::build-scans-clean.png[background,size=90%]
+
+[%notitle]
+=== Build Scans - Demo
+image::failed-dev-scans.png[background,size=90%]
 
 === Build-Zuverlässigkeit
 
 * Zuverlässige Parallelität
 * Cache ist treibende Kraft
 * Build Scans zum Debugging
-* https://enterprise-demo.gradle.com/example/s/share-console-output-you-dont-understand/log#L12[console]
-https://enterprise-demo.gradle.com/example/s/pull-in-help-for-an-unexpectedly-failing-test/tests/a5a6sydx5wc2o[test]
-https://enterprise-demo.gradle.com/example/s/check-if-your-code-relies-on-a-specific-dependency/dependencies?dependencies=guava&expandAll&focusedDependencyView=dependents[dependencies]
-https://enterprise-demo.gradle.com/scans?offset=0&size=50&sortColumn=startTime&sortOrder=desc&tasks=clean[clean]
-https://enterprise-demo.gradle.com/c/5hcmtqtipvz3a/5cfa7ohmgp4be/infrastructure[comparison]
-
-
-[NOTE.speaker]
---
-* Show scan with build failure (link to line)
-* Show scan with failing test (link to test failure)
-* Search for dependency on dependency view
-* Search for builds with requested task `clean`
-* Infrastructure comparison
---
-
-=== Build Performance und Build Scans - Demo
-
-https://enterprise-demo.gradle.com/example/s/investigate-what-has-the-biggest-impact-on-your-configuration-time/performance/configuration[configuration]
-https://enterprise-demo.gradle.com/example/s/make-a-build-faster[execution]
-https://enterprise-demo.gradle.com/example/s/determine-how-much-time-was-spent-resolving-dependencies/performance/networkActivity[network]
-https://enterprise-demo.gradle.com/example/s/investigate-why-you-are-getting-an%E2%80%93unexpected-build-cache-miss[cache miss]
-
-[NOTE.speaker]
---
-* Show input comparison for build cache
-* Go into detail of the Performance improvements
-** configuration time
-** long running tasks
-** long running tests
---
-
-== Hohes Maß an Automation
-
-=== Composite Build - Demo
-
-=== Composite Build
-
-* Exzellente IDE Integration (Eclipse/Intellij)
-* Funktioniert mit `--continuous` und `--parallel`
+* https://gradle.com/build-scans
 
 == Schnelles Debugging
 
 * Build Scans!
 * Nachverfolgbarkeit
 * Tags und Custom Values
-  https://enterprise-demo.gradle.com/s/4speks4cee7du/custom-values[checkstyle]
-  https://enterprise-demo.gradle.com/s/4em4d65gvljsm/custom-values[gradle]
 
-[NOTE.speaker]
---
-* Show custom values: CI, VCS information, Checkstyle errors, Links, etc.
---
+== Maven vs. Gradle
 
-== Kultur der Produktivität
+=== Performance
 
-* Verantwortlichkeit
-* Professionalisierung
-* Produkt vs. Support
+=== Flexibilität
+
+* C/C++
+* Android
+* Erweiterbares Modell
+
+=== User Experience
+
+* Console
+* Completion
+* IDE support
+* Build scans
+
+=== Dependency Management
+
+** API vs Implementation
+** Composite builds
+** Wirklich Abhängigkeiten managen
+
+=== Dependency Management
+
+[source,kotlin]
+----
+open class CodeNarcRule : ComponentMetadataRule {
+  override fun execute(context) {
+    context.details.allVariants {
+      withDependencies {
+        removeAll {
+          it.group == "org.codehaus.groovy"
+        }
+        add("org.codehaus.groovy:groovy-all") {
+          version {
+            prefer("2.4.15")
+          }
+          because("We use groovy-all everywhere")
+} } } } }
+----
+
+=== Migration zu Gradle
+
+* `gradle init`
+* https://guides.gradle.org/migrating-from-maven[Migrations-Guide]
+* Build Scans zur Verifikation
 
 == Danke
 
-* Slides: https://wolfs.github.io/talk-gradle-day-2017[]
 * Training: https://gradle.org/training[]
 * Gradle Guides: https://guides.gradle.org[]
 * Gradle Enterprise: https://gradle.com[]
