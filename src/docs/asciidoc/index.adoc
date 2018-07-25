@@ -142,7 +142,7 @@ BUILD SUCCESSFUL
 * Aufzeichnung was in einem Build passiert ist
 * Permanente und teilbare URLs
 * Für Entwickler und Build Master
-* https://gradle.com/build-scans
+* https://gradle.com/build-scans[]
 
 === Build Cache - Demo
 
@@ -169,7 +169,8 @@ image::build-cache-loaded-from-cache.png[background,size=90%]
 
 * Stabil für Java, Groovy und Scala Projekte
 * Performantes Backend von Gradle
-* Dockerhub: https://hub.docker.com/r/gradle/build-cache-node/[gradle/build-cache-node]
+* Dockerhub: +
+  https://hub.docker.com/r/gradle/build-cache-node/[hub.docker.com/r/gradle/build-cache-node]
 * Integriert mit Gradle Enterprise
 
 === Messe und optimiere
@@ -200,7 +201,7 @@ image::failed-dev-scans.png[background,size=90%]
 * Zuverlässige Parallelität
 * Cache ist treibende Kraft
 * Build Scans zum Debugging
-* https://gradle.com/build-scans
+* https://gradle.com/build-scans[]
 
 == Schnelles Debugging
 
@@ -258,6 +259,7 @@ open class CodeNarcRule : ComponentMetadataRule {
 
 == Danke
 
+* Slides: https://wolfs.github.io/talk-gradle-30-mins-2018[wolfs.github.io/talk-gradle-30-mins-2018]
 * Training: https://gradle.org/training[]
 * Gradle Guides: https://guides.gradle.org[]
 * Gradle Enterprise: https://gradle.com[]
